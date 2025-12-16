@@ -65,6 +65,64 @@ header h1 {
     width: 0%;
 }
 
+.breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+    padding: 20px 16px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-top: 2px solid #e9ecef;
+}
+
+.breadcrumb {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #95a5a6;
+    background: white;
+    color: #7f8c8d;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breadcrumb:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb.active {
+    background: #3498db;
+    color: white;
+    border-color: #2980b9;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    transform: scale(1.1);
+}
+
+.breadcrumb.correct {
+    background: #27ae60;
+    color: white;
+    border-color: #27ae60;
+}
+
+.breadcrumb.incorrect {
+    background: #e74c3c;
+    color: white;
+    border-color: #e74c3c;
+}
+
+.breadcrumb.unanswered {
+    background: white;
+    color: #95a5a6;
+    border-color: #bdc3c7;
+}
+
 .question-number {
     font-size: 0.875rem;
     color: #7f8c8d;
@@ -178,6 +236,7 @@ header h1 {
 .button-container {
     display: flex;
     justify-content: center;
+    gap: 12px;
 }
 
 .btn {
@@ -192,8 +251,20 @@ header h1 {
     font-weight: 500;
 }
 
-.btn:hover {
+.btn-primary {
+    background: #3498db;
+}
+
+.btn-primary:hover:not(:disabled) {
     background: #2980b9;
+}
+
+.btn-secondary {
+    background: #95a5a6;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
 }
 
 .btn:active {
@@ -203,7 +274,7 @@ header h1 {
 .btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background: #95a5a6;
+    background: #bdc3c7;
 }
 
 .hidden {

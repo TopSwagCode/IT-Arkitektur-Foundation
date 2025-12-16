@@ -447,12 +447,14 @@ let currentQuestion = 0;
 let score = 0;
 let selectedAnswer = null;
 let answered = false;
+let userAnswers = new Array(questions.length).fill(null); // Track all answers
 
 // DOM elements
 const questionNumber = document.getElementById('question-number');
 const questionText = document.getElementById('question-text');
 const optionsContainer = document.getElementById('options-container');
-const nextBtn = document.getElementById('next-btn');
+const answerBtn = document.getElementById('answer-btn');
+const skipBtn = document.getElementById('skip-btn');
 const feedback = document.getElementById('feedback');
 const examContainer = document.getElementById('question-container');
 const resultContainer = document.getElementById('result-container');
@@ -462,11 +464,56 @@ const resultText = document.getElementById('result-text');
 const scoreDetails = document.getElementById('score-details');
 const restartBtn = document.getElementById('restart-btn');
 const progress = document.getElementById('progress');
+const breadcrumbsContainer = document.getElementById('breadcrumbs');
 
 // Initialize
 function init() {
+    createBreadcrumbs();
     loadQuestion();
     updateProgress();
+}
+
+// Create breadcrumb navigation
+function createBreadcrumbs() {
+    breadcrumbsContainer.innerHTML = '';
+    questions.forEach((_, index) => {
+        const crumb = document.createElement('button');
+        crumb.className = 'breadcrumb';
+        crumb.textContent = index + 1;
+        crumb.addEventListener('click', () => navigateToQuestion(index));
+        breadcrumbsContainer.appendChild(crumb);
+    });
+    updateBreadcrumbs();
+}
+
+// Update breadcrumb states
+function updateBreadcrumbs() {
+    const crumbs = document.querySelectorAll('.breadcrumb');
+    crumbs.forEach((crumb, index) => {
+        crumb.classList.remove('active', 'correct', 'incorrect', 'unanswered');
+        
+        if (index === currentQuestion) {
+            crumb.classList.add('active');
+        } else if (userAnswers[index] !== null) {
+            if (userAnswers[index] === questions[index].correct) {
+                crumb.classList.add('correct');
+            } else {
+                crumb.classList.add('incorrect');
+            }
+        } else {
+            crumb.classList.add('unanswered');
+        }
+    });
+}
+
+// Navigate to a specific question
+function navigateToQuestion(index) {
+    currentQuestion = index;
+    answered = userAnswers[index] !== null;
+    selectedAnswer = userAnswers[index];
+    loadQuestion();
+    updateProgress();
+    updateBreadcrumbs();
 }
 
 // Load current question
@@ -477,8 +524,6 @@ function loadQuestion() {
     }
 
     const q = questions[currentQuestion];
-    answered = false;
-    selectedAnswer = null;
     
     questionNumber.textContent = `Spørgsmål ${currentQuestion + 1} af ${questions.length}`;
     questionText.textContent = q.question;
@@ -510,8 +555,47 @@ function loadQuestion() {
         optionsContainer.appendChild(optionDiv);
     });
     
-    nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Afslut Test' : 'Næste';
-    nextBtn.disabled = true;
+    // Restore previous answer if exists
+    if (answered && selectedAnswer !== null) {
+        document.getElementById(`option${selectedAnswer}`).checked = true;
+        document.querySelectorAll('.option')[selectedAnswer].classList.add('selected');
+        showFeedbackForAnswer();
+        answerBtn.textContent = 'Næste';
+        answerBtn.disabled = false;
+        skipBtn.style.display = 'none';
+    } else {
+        answerBtn.textContent = 'Besvar';
+        answerBtn.disabled = true;
+        skipBtn.style.display = 'inline-block';
+    }
+}
+
+// Show feedback for already answered question
+function showFeedbackForAnswer() {
+    const q = questions[currentQuestion];
+    const isCorrect = selectedAnswer === q.correct;
+    
+    const options = document.querySelectorAll('.option');
+    options.forEach((opt, index) => {
+        opt.classList.add('disabled');
+        if (index === q.correct) {
+            opt.classList.add('correct');
+        } else if (index === selectedAnswer && !isCorrect) {
+            opt.classList.add('incorrect');
+        }
+    });
+    
+    feedback.classList.add('show');
+    if (isCorrect) {
+        feedback.classList.add('correct');
+        feedback.innerHTML = `<strong>✓ Korrekt!</strong><br><span class="explanation">${q.explanation}</span>`;
+    } else {
+        feedback.classList.add('incorrect');
+        feedback.innerHTML = `<strong>✗ Forkert.</strong> Det rigtige svar er: ${String.fromCharCode(65 + q.correct)}<br><span class="explanation">${q.explanation}</span>`;
+    }
+    
+    answerBtn.textContent = currentQuestion === questions.length - 1 ? 'Se Resultat' : 'Næste';
+    skipBtn.style.display = 'none';
 }
 
 // Select an option
@@ -530,18 +614,36 @@ function selectOption(index, optionDiv) {
     // Check the radio button
     document.getElementById(`option${index}`).checked = true;
     
-    nextBtn.disabled = false;
+    // Enable answer button
+    answerBtn.disabled = false;
 }
 
-// Next button handler
-nextBtn.addEventListener('click', () => {
+// Answer button handler
+answerBtn.addEventListener('click', () => {
     if (!answered && selectedAnswer !== null) {
         checkAnswer();
+        answerBtn.textContent = 'Næste';
+        skipBtn.style.display = 'none';
     } else if (answered) {
+        // Move to next question
         currentQuestion++;
+        selectedAnswer = null;
+        answered = false;
         loadQuestion();
         updateProgress();
+        updateBreadcrumbs();
     }
+});
+
+// Skip button handler
+skipBtn.addEventListener('click', () => {
+    // Move to next question without answering
+    currentQuestion++;
+    selectedAnswer = null;
+    answered = false;
+    loadQuestion();
+    updateProgress();
+    updateBreadcrumbs();
 });
 
 // Check answer
@@ -549,12 +651,15 @@ function checkAnswer() {
     if (selectedAnswer === null) return;
     
     answered = true;
+    userAnswers[currentQuestion] = selectedAnswer;
     const q = questions[currentQuestion];
     const isCorrect = selectedAnswer === q.correct;
     
     if (isCorrect) {
         score++;
     }
+    
+    updateBreadcrumbs();
     
     // Show feedback
     const options = document.querySelectorAll('.option');
@@ -576,7 +681,8 @@ function checkAnswer() {
         feedback.innerHTML = `<strong>✗ Forkert.</strong> Det rigtige svar er: ${String.fromCharCode(65 + q.correct)}<br><span class="explanation">${q.explanation}</span>`;
     }
     
-    nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Se Resultat' : 'Næste Spørgsmål';
+    answerBtn.textContent = currentQuestion === questions.length - 1 ? 'Se Resultat' : 'Næste spørgsmål';
+    skipBtn.style.display = 'none';
 }
 
 // Update progress bar
@@ -610,12 +716,14 @@ restartBtn.addEventListener('click', () => {
     score = 0;
     selectedAnswer = null;
     answered = false;
+    userAnswers = new Array(questions.length).fill(null);
     
     examContainer.classList.remove('hidden');
     resultContainer.classList.add('hidden');
     scoreCircle.classList.remove('passed', 'failed');
     resultText.classList.remove('passed', 'failed');
     
+    createBreadcrumbs();
     loadQuestion();
     updateProgress();
 });
