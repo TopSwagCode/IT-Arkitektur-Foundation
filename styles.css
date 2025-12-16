@@ -138,6 +138,7 @@ header h1 {
     margin-bottom: 28px;
     line-height: 1.6;
     font-weight: 500;
+    white-space: pre-line;
 }
 
 .options {

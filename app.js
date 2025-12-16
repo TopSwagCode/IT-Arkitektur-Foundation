@@ -1,5 +1,6 @@
-// All exam questions
+// All exam questions - both simple and advanced
 const questions = [
+    // Simple questions (1-40)
     {
         question: "Hvad er IT-arkitekturens primære formål?",
         options: [
@@ -221,7 +222,7 @@ const questions = [
         explanation: "Arkitekten sikrer helhed og sammenhæng."
     },
     {
-        question: "Hvad betyder \"concerns\" i arkitektur?",
+        question: "Hvad betyder 'concerns' i arkitektur?",
         options: [
             "Teknologier",
             "Interessenters bekymringer og behov",
@@ -342,7 +343,7 @@ const questions = [
         explanation: "Teknologiartefakter er fx servere, netværk og platforme."
     },
     {
-        question: "Hvad betyder \"as-is\" arkitektur?",
+        question: "Hvad betyder 'as-is' arkitektur?",
         options: [
             "Fremtidig arkitektur",
             "Ønsket arkitektur",
@@ -353,7 +354,7 @@ const questions = [
         explanation: "As-is beskriver den aktuelle situation."
     },
     {
-        question: "Hvad er \"to-be\" arkitektur?",
+        question: "Hvad er 'to-be' arkitektur?",
         options: [
             "Nuværende",
             "Historisk",
@@ -439,6 +440,172 @@ const questions = [
         ],
         correct: 2,
         explanation: "God arkitektur skaber forståelse og forretningsværdi."
+    },
+    // Advanced questions (41-55)
+    {
+        question: "Hvilke udsagn om IT-arkitektur er korrekte?\n\n1. IT-arkitektur fungerer som bindeled mellem forretning og IT\n2. IT-arkitektur har primært fokus på teknisk implementering\n3. IT-arkitektur understøtter beslutningstagning\n4. IT-arkitektur erstatter projektledelse",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "Arkitektur binder forretning og IT sammen og bruges til beslutninger – ikke kun teknik og ikke som erstatning for projektledelse."
+    },
+    {
+        question: "Hvilke udsagn om arkitekturprincipper er korrekte?\n\n1. De er styrende for arkitektoniske beslutninger\n2. De er altid tekniske\n3. De er relativt stabile over tid\n4. De beskriver konkrete implementeringer",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Ingen"
+        ],
+        correct: 0,
+        explanation: "Arkitekturprincipper guider beslutninger og er relativt stabile – de er ikke altid tekniske og beskriver ikke konkrete implementeringer."
+    },
+    {
+        question: "Hvilke udsagn om capabilities er korrekte?\n\n1. Capabilities beskriver hvad organisationen kan\n2. Capabilities afhænger direkte af IT-systemer\n3. Capabilities er relativt stabile over tid\n4. Capabilities er det samme som processer",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "Capabilities beskriver organisationens evner og er stabile over tid – de afhænger ikke direkte af systemer og er ikke det samme som processer."
+    },
+    {
+        question: "Hvilke af følgende er ikke-funktionelle krav?\n\n1. Systemet skal kunne håndtere 10.000 brugere\n2. Systemet skal kunne oprette en kunde\n3. Systemet skal have høj tilgængelighed\n4. Systemet skal kunne udskrive faktura",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "Skalerbarhed og tilgængelighed er kvalitetskrav (ikke-funktionelle), mens opret kunde og udskriv faktura er funktionelle krav."
+    },
+    {
+        question: "Hvilke udsagn er korrekte?\n\n1. Viewpoint definerer perspektivet\n2. View er den konkrete repræsentation\n3. View og viewpoint betyder det samme\n4. Viewpoints bruges til at adressere concerns",
+        options: [
+            "1, 2 og 4",
+            "1 og 3",
+            "2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "Viewpoint definerer perspektivet, view er repræsentationen, og viewpoints adresserer interessenternes concerns."
+    },
+    {
+        question: "Hvilke udsagn om dataarkitektur er korrekte?\n\n1. Dataarkitektur adresserer dataejerskab\n2. Dataarkitektur er kun teknisk\n3. Datamodeller kan være konceptuelle, logiske og fysiske\n4. Dataarkitektur er irrelevant for GDPR",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Ingen"
+        ],
+        correct: 0,
+        explanation: "Dataarkitektur adresserer ejerskab og har forskellige abstraktionsniveauer – den er ikke kun teknisk og er meget relevant for GDPR."
+    },
+    {
+        question: "Hvilke udsagn om applikationsarkitektur er korrekte?\n\n1. Den beskriver applikationer og deres samspil\n2. Den beskriver hardware i detaljer\n3. Den understøtter forretningsprocesser\n4. Den er uafhængig af forretningen",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "Applikationsarkitektur beskriver applikationer og deres samspil for at understøtte forretningsprocesser – ikke hardware og ikke uafhængig af forretning."
+    },
+    {
+        question: "Hvilke udsagn om EDA (Event-Driven Architecture) er korrekte?\n\n1. Kommunikation sker via events\n2. Systemer er løst koblede\n3. Alle kald er synkrone\n4. EDA øger fleksibilitet",
+        options: [
+            "1, 2 og 4",
+            "1 og 3",
+            "2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "EDA bruger events til kommunikation, giver løs kobling og øger fleksibilitet – kald er typisk asynkrone, ikke synkrone."
+    },
+    {
+        question: "Hvilke udsagn om TOGAF ADM er korrekte?\n\n1. ADM er iterativ\n2. ADM er et programmeringssprog\n3. ADM bruges til arkitekturudvikling\n4. ADM er en datamodel",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "TOGAF ADM er en iterativ metode til arkitekturudvikling – det er hverken et programmeringssprog eller en datamodel."
+    },
+    {
+        question: "Hvilke udsagn om governance er korrekte?\n\n1. Governance handler om styring og beslutninger\n2. Governance erstatter arkitektur\n3. Governance understøtter compliance\n4. Governance er kun teknisk",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "Governance handler om styring, beslutninger og compliance – det erstatter ikke arkitektur og er ikke kun teknisk."
+    },
+    {
+        question: "Hvilke udsagn er korrekte?\n\n1. As-is beskriver nuværende arkitektur\n2. To-be beskriver målarkitektur\n3. As-is er irrelevant\n4. To-be bruges til roadmap",
+        options: [
+            "1 og 2",
+            "3 og 4",
+            "1, 2 og 4",
+            "Alle"
+        ],
+        correct: 2,
+        explanation: "As-is beskriver nuværende situation, to-be beskriver mål, og to-be bruges til roadmap – as-is er ikke irrelevant."
+    },
+    {
+        question: "Hvilke udsagn om arkitekturrammeværker er korrekte?\n\n1. FDA bygger delvist på TOGAF\n2. Rammeværker giver fælles sprog\n3. Rammeværker fjerner behovet for arkitekter\n4. Rammeværker understøtter governance",
+        options: [
+            "1, 2 og 4",
+            "1 og 3",
+            "2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "FDA bygger på TOGAF, rammeværker giver fælles sprog og understøtter governance – de fjerner ikke behovet for arkitekter."
+    },
+    {
+        question: "Hvilke udsagn om interessenter er korrekte?\n\n1. Interessenter har concerns\n2. Interessenter er kun tekniske roller\n3. Interessenter påvirkes af arkitektur\n4. Interessenter påvirker arkitektur",
+        options: [
+            "1, 3 og 4",
+            "2 og 3",
+            "1 og 2",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "Interessenter har concerns, påvirkes af og påvirker arkitektur – de er ikke kun tekniske roller."
+    },
+    {
+        question: "Hvilke udsagn om value streams er korrekte?\n\n1. Value streams viser værdiskabelse\n2. Value streams er tekniske flows\n3. Value streams er kundecentrerede\n4. Value streams erstatter processer",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "Value streams viser værdiskabelse og er kundecentrerede – de er ikke tekniske flows og erstatter ikke processer."
+    },
+    {
+        question: "Hvilke udsagn om systemarkitektur er korrekte?\n\n1. Systemarkitektur fokuserer på ét system\n2. Systemarkitektur ignorerer enterprise-kontekst\n3. Systemarkitektur dækker flere arkitekturlag\n4. Systemarkitektur er kun teknisk",
+        options: [
+            "1 og 3",
+            "2 og 4",
+            "1, 2 og 3",
+            "Alle"
+        ],
+        correct: 0,
+        explanation: "Systemarkitektur fokuserer på ét system og dækker flere lag – den ignorerer ikke enterprise-kontekst og er ikke kun teknisk."
     }
 ];
 
