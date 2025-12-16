@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Arkitektur Foundation – Øveeksamen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>IT Arkitektur Foundation</h1>
+            <p class="subtitle">Øveeksamen</p>
+        </header>
+
+        <div id="exam-container">
+            <div class="progress-bar">
+                <div id="progress" class="progress-fill"></div>
+            </div>
+            
+            <div id="question-container">
+                <div class="question-number" id="question-number"></div>
+                <h2 id="question-text"></h2>
+                
+                <div class="options" id="options-container">
+                    <!-- Options will be inserted here dynamically -->
+                </div>
+                
+                <div class="feedback" id="feedback"></div>
+                
+                <div class="button-container">
+                    <button id="next-btn" class="btn">Næste</button>
+                </div>
+            </div>
+
+            <div id="result-container" class="hidden">
+                <h2>Eksamen Afsluttet!</h2>
+                <div class="score-display">
+                    <div class="score-circle" id="score-circle">
+                        <span id="score-percentage"></span>
+                    </div>
+                </div>
+                <p class="result-text" id="result-text"></p>
+                <p class="score-details" id="score-details"></p>
+                <button id="restart-btn" class="btn">Start Forfra</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
