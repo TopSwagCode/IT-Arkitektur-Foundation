@@ -895,5 +895,31 @@ restartBtn.addEventListener('click', () => {
     updateProgress();
 });
 
+// QR Code overlay functionality
+const shareBtn = document.getElementById('share-btn');
+const qrOverlay = document.getElementById('qr-overlay');
+const qrClose = document.querySelector('.qr-close');
+
+shareBtn.addEventListener('click', () => {
+    qrOverlay.classList.remove('hidden');
+});
+
+qrClose.addEventListener('click', () => {
+    qrOverlay.classList.add('hidden');
+});
+
+qrOverlay.addEventListener('click', (e) => {
+    if (e.target === qrOverlay) {
+        qrOverlay.classList.add('hidden');
+    }
+});
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !qrOverlay.classList.contains('hidden')) {
+        qrOverlay.classList.add('hidden');
+    }
+});
+
 // Start the exam
 init();
